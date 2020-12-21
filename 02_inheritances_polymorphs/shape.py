@@ -11,9 +11,9 @@ import math
 
 class Shape:
     """An abstract Shape class
-    While we may not actually instantiate a "shape" I've tried to 
+    While we may not actually instantiate a "shape" I've tried to
     describe what a shape of 'n' sides might be.
-    Any shape we make will in practise have some value for the 
+    Any shape we make will in practise have some value for the
     number of sides."""
     shape_family = {0: "Nothing",
                     1: "Dot",
@@ -36,7 +36,7 @@ class Shape:
         return self.side * self.num_sides
 
     def area(self):
-        raise NotImplementedError("Not implemented for this abstract class")
+        raise NotImplementedError("Not implemented for this *abstract* class")
 
 
 class Triangle(Shape):

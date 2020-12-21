@@ -1,3 +1,7 @@
+# @Author:srattigan
+# @Date:2020-12-21 09:26:42
+# @LastModifiedBy:srattigan
+# @Last Modified time:2020-12-21 09:26:42
 
 import turtle
 
@@ -9,13 +13,32 @@ import turtle
 
 def draw_star():
     star = turtle.Turtle()
-    for i in range(100):
-        star.forward(100)
+    star.screen.colormode(255)
+    star.pencolor((240, 100, 210))
+    star.pensize(10)
+    star.left(45)
+    for i in range(5):
+        star.forward(200)
         star.right(144)
     turtle.done()
 
 
+def draw_star_fill():
+    star = turtle.Turtle()
+    star.screen.colormode(255)
+    star.pencolor((240, 100, 210))
+    star.fillcolor((240, 100, 210))
+    star.begin_fill()
+    for i in range(5):
+        star.forward(200)
+        star.right(144)
+    star.end_fill()
+    turtle.done()
+
+
+
 def draw_square():
+    print("Square Called")
     square = turtle.Turtle()
     square.screen.colormode(255)
     square.pencolor((255, 0, 0))
@@ -24,6 +47,9 @@ def draw_square():
     turtle.done()
 
 
+# draw_star()
+draw_star_fill()
+# draw_square()
 # draw_square()  # call the func
 
 # create the function for this
