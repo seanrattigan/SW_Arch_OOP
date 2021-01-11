@@ -1,16 +1,26 @@
 # @Author:srattigan
 # @Date:2021-01-07 11:12:16
 # @LastModifiedBy:srattigan
-# @Last Modified time:2021-01-08 10:11:03
+# @Last Modified time:2021-01-11 09:27:17
 
 
 def gcd(num, denom):
+    """Gets the highest common denom of 2 numbers
+
+    Args:
+        num (int): a number
+        denom (int): number
+
+    Returns:
+        [int]: num
+    """
     result = num % denom
     if result == 0:
         return denom
     elif result == 1:
         return 1
     return gcd(denom, result)
+
 
 class Fraction:
     """Simulates a Fraction class
@@ -107,23 +117,51 @@ class Fraction:
         second = ~other
         return self * second
 
+    def __eq__(self, other):
+        """Implements operator overloading for the ==
+        to use with Fractions
 
+        Args:
+            other (Fraction): a Fraction instance
 
+        Returns:
+            Fraction: a Fraction instance
+        """
+        return self.numerator == other.numerator and self.denominator == other.denominator
+
+    def __ne__(self, other):  # nathan  !=
+        pass
+
+    def __gt__(self, other):  # alan  >
+        pass
+
+    def __lt__(self, other):  # jonathan  <
+        pass
+
+    def __gte__(self, other):  # taha  >=
+        pass
+
+    def __lte__(self, other):  # <=
+        pass
+
+c = Fraction('2/4')
+d = Fraction('1/2')
+print(c == d)
 # a = Fraction('2/16')
 # b = Fraction('1/33')
 # print(b / a)
 # print(a * )
-x = Fraction('25/79')
-y = Fraction('33/117')
-print(y - x)
+# x = Fraction('25/79')
+# y = Fraction('33/117')
+# print(y - x)
 # f1 = Fraction(1, 2)  # for 1/2
-f2 = Fraction('1/2')  # for 1/2
-f1 = Fraction('1/4')
-f3 = f1 + f2  # 6/8
-print(f3)
-f4 = f2 - f1  # 2/8
-print(f4)
-print(float(f2))
-print(f1.__float__())
-print(~f3)
-print(f3)
+# f2 = Fraction('1/2')  # for 1/2
+# f1 = Fraction('1/4')
+# f3 = f1 + f2  # 6/8
+# print(f3)
+# f4 = f2 - f1  # 2/8
+# print(f4)
+# print(float(f2))
+# print(f1.__float__())
+# print(~f3)
+# print(f3)
