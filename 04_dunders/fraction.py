@@ -130,23 +130,68 @@ class Fraction:
         return self.numerator == other.numerator and self.denominator == other.denominator
 
     def __ne__(self, other):  # nathan  !=
-        pass
+        """Implements operator overloading for the !=
+        to use with Fractions
+
+        Args:
+            other (Fraction): a Fraction instance
+
+        Returns:
+            Fraction: a Fraction instance
+        """
+        return not(self.numerator == other.numerator and self.denominator == other.denominator)
 
     def __gt__(self, other):  # alan  >
-        pass
+        """Implements operator overloading for the >
+        to use with Fractions
+
+        Args:
+            other (Fraction): a Fraction instance
+
+        Returns:
+            Fraction: a Fraction instance
+        """
+        return float(self) > float(other)
 
     def __lt__(self, other):  # jonathan  <
-        pass
+        """Implements operator overloading for the <
+        to use with Fractions
 
-    def __gte__(self, other):  # taha  >=
-        pass
+        Args:
+            other (Fraction): a Fraction instance
 
-    def __lte__(self, other):  # <=
-        pass
+        Returns:
+            Fraction: a Fraction instance
+        """
+        return float(self) < float(other)
 
-c = Fraction('2/4')
+    def __ge__(self, other):  # taha  >=
+        """Implements operator overloading for the >=
+        to use with Fractions
+
+        Args:
+            other (Fraction): a Fraction instance
+
+        Returns:
+            Fraction: a Fraction instance
+        """
+        return float(self) > float(other) or self == other
+
+    def __le__(self, other):  # <=
+        """Implements operator overloading for the >=
+        to use with Fractions
+
+        Args:
+            other (Fraction): a Fraction instance
+
+        Returns:
+            Fraction: a Fraction instance
+        """
+        return float(self) < float(other) or self == other
+
+c = Fraction('3/4')
 d = Fraction('1/2')
-print(c == d)
+print(c <= d)
 # a = Fraction('2/16')
 # b = Fraction('1/33')
 # print(b / a)
