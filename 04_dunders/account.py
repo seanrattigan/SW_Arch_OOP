@@ -42,7 +42,6 @@ class BankAccount:
         return self.balance != other.balance
 
 
- 
 class SavingsAccount(BankAccount):
     """An account that pays interest
     """
