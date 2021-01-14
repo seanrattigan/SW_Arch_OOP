@@ -12,15 +12,15 @@ SCREEN_WIDTH = 750
 SCREEN_HEIGHT = 750
 SCREEN_TITLE = "Test My Rectangles"
 
-bucket = [Rectangle(50, 5), Rectangle(10, 44)]
-
+bucket = [Rectangle(250, 5), Rectangle(10, 44, (255,232, 123))]
+# print(bucket)
 
 def draw_rectangles(rectangle_array):
     # Open the window. Set the window title and dimensions
     arcade.open_window(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
 
     # Set the background color
-    arcade.set_background_color(arcade.color.BLACK)
+    arcade.set_background_color(arcade.color.RED)
 
     # Clear screen and start render process
     arcade.start_render()
@@ -28,8 +28,13 @@ def draw_rectangles(rectangle_array):
     # --- Drawing Commands Will Go Here ---
 
     # Draw the Rectangle
-    for b in Rectangle_array:
-        b.draw()
+    arcade.draw_rectangle_filled(random.randrange(100, 600),  # x
+                                       random.randrange(100, 600),  # y
+                                       200,
+                                       200,
+                                       arcade.color.BLUE)
+    for r in rectangle_array:
+        r.draw()
 
     # Finish drawing and display the result
     arcade.finish_render()
@@ -40,3 +45,4 @@ def draw_rectangles(rectangle_array):
 
 if __name__ == "__main__":
     draw_rectangles(bucket)
+    pass

@@ -4,6 +4,8 @@
 # @Last Modified time:2021-01-14 11:33:20
 
 import math
+import arcade
+import random as r
 
 # globals
 colors = {
@@ -37,7 +39,11 @@ class Rectangle:
         self.color = col
 
     def draw(self):
-        pass
+        arcade.draw_rectangle_filled(r.randrange(100, 200),  # x
+                                       r.randrange(100, 200),  # y
+                                       self.width,
+                                       self.height,
+                                       self.color)
 
     def __add__(self, other):
         new_area = self.area() + other.area()
@@ -85,9 +91,9 @@ class Rectangle:
     
 
 
-
-r1 = Rectangle(3,5)
-r2 = Rectangle("dog", "cat")
-r3 = Rectangle(-33, "88i")
-r4 = r3 - r2
-r1.set_color((240, 34, 56))
+if __name__ == "__main__":
+    r1 = Rectangle(3,5)
+    r2 = Rectangle("dog", "cat")
+    r3 = Rectangle(-33, "88i")
+    r4 = r3 - r2
+    r1.set_color((240, 34, 56))
