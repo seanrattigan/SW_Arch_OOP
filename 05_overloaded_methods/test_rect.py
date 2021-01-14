@@ -75,7 +75,7 @@ def change_color_tests():
     try:
         for rect in range(len(box_bucket) // 2):
             print(f"\tBefore:\t", box_bucket[rect])
-            box_bucket[rect].color = set_random_color()
+            box_bucket[rect].set_color(set_random_color())
             print(f"\tAfter:\t", box_bucket[rect])
         print(f"{gtext}\nNote: All seems to have gone well changing colors- have they changed?{txt_rst}")
         return True
