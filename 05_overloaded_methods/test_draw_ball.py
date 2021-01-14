@@ -29,10 +29,10 @@ def draw_rectangles(rectangle_array):
 
     # Draw the Rectangle
     arcade.draw_rectangle_filled(random.randrange(100, 600),  # x
-                                       random.randrange(100, 600),  # y
-                                       200,
-                                       200,
-                                       arcade.color.BLUE)
+                                 random.randrange(100, 600),  # y
+                                 200,
+                                 200,
+                                 arcade.color.BLUE)
     for r in rectangle_array:
         r.draw()
 
