@@ -33,7 +33,8 @@ box_bucket = []
 op_ref = {"+": operator.add,
           "-": operator.sub,
           "*": operator.mul,
-          "/": operator.truediv}  # can change if you need to
+          "/": operator.truediv
+          }  # can change if you need to
 
 my_nums = [100, 200, 10, 80, 60.2, 90.66, 140.8]
 

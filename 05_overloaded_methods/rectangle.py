@@ -18,14 +18,37 @@ RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 
 
+def validate_color(col):
+    # if type is tuple
+    #   if len is 3
+    #     if each is int
+    #         it's true
+    # otherwise false
+    pass
+
+
 class Rectangle:
+    """Models a rectangle
+    """
     def __init__(self, width, height, color=(0, 255, 0)):
+        """[summary]
+
+        Args:
+            width ([type]): [description]
+            height ([type]): [description]
+            color (tuple, optional): an rgb color. Defaults to (0, 255, 0).
+        """
         # make sure valid nums, color
         self.height = height
         self.width = width
         self.color = color
 
     def __repr__(self):
+        """[summary]
+
+        Returns:
+            str: a string rep of a rectangle
+        """
         return f"Rect: w={self.width}; h={self.height}; col={self.color}"
 
     def area(self):
@@ -40,16 +63,16 @@ class Rectangle:
 
     def draw(self):
         arcade.draw_rectangle_filled(r.randrange(100, 200),  # x
-                                       r.randrange(100, 200),  # y
-                                       self.width,
-                                       self.height,
-                                       self.color)
+                                     r.randrange(100, 200),  # y
+                                     self.width,
+                                     self.height,
+                                     self.color)
 
     def __add__(self, other):
         new_area = self.area() + other.area()
         # square_area = side ** 2
         # side = square_area
-        side = math.sqrt(new_area) # given a square with area new_area
+        side = math.sqrt(new_area)  # given a square with area new_area
         return Rectangle(side, side)
 
     def __sub__(self, other):
