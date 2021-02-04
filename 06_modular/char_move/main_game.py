@@ -1,7 +1,7 @@
 # @Author:srattigan
 # @Date:2021-02-04 10:58:45
 # @LastModifiedBy:srattigan
-# @Last Modified time:2021-02-04 10:58:45
+# @Last Modified time:2021-02-04 11:41:13
 """
 Sprite Collect Coins
 
@@ -17,6 +17,7 @@ import random
 import arcade
 from settings import *
 from coin import Coin
+from player import Player
 
 
 class MyGame(arcade.Window):
@@ -33,7 +34,7 @@ class MyGame(arcade.Window):
 
         # Set up the player info
         self.player_sprite = None
-        self.score = 0
+        self.score = 0  #- REFACTOR TO PLAYER?
 
         # Don't show the mouse cursor
         self.set_mouse_visible(False)
@@ -47,15 +48,12 @@ class MyGame(arcade.Window):
         self.player_list = arcade.SpriteList()
         self.coin_list = arcade.SpriteList()
 
-        # Score
+        # Score - REFACTOR TO PLAYER?
         self.score = 0
 
         # Set up the player
         # Character image from kenney.nl
-        self.player_sprite = arcade.Sprite(":resources:images/animated_characters/female_person/femalePerson_idle.png",
-                                           SPRITE_SCALING_PLAYER)
-        self.player_sprite.center_x = 50
-        self.player_sprite.center_y = 50
+        self.player_sprite = Player()
         self.player_list.append(self.player_sprite)
 
         # Create the coins
@@ -70,10 +68,10 @@ class MyGame(arcade.Window):
         self.player_list.draw()
 
         # Put the text on the screen.
-        output = f"Score: {self.score}"
+        output = f"Score: {self.score}"  # what if score is part of Player?
         arcade.draw_text(output, 10, 20, arcade.color.WHITE, 14)
 
-    def on_mouse_motion(self, x, y, dx, dy):
+    def on_mouse_motion(self, x, y, dx, dy):  # - REFACTOR TO PLAYER?
         """ Handle Mouse Motion """
 
         # Move the center of the player sprite to match the mouse x, y
@@ -88,7 +86,8 @@ class MyGame(arcade.Window):
         self.coin_list.update()
 
         # Generate a list of all sprites that collided with the player.
-        coins_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.coin_list)
+        coins_hit_list = arcade.check_for_collision_with_list(self.player_sprite,
+                                                              self.coin_list)
 
         # Loop through each colliding sprite, remove it, and add to the score.
         for coin in coins_hit_list:
