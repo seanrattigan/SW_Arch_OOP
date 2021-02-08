@@ -30,6 +30,8 @@ class Player(arcade.Sprite):
         super().__init__(img, SPRITE_SCALING)
         self.center_x = 50
         self.center_y = 50
+        self.change_x = 0
+        self.change_y = 0
         # keys are in order of L, U, R, D
         self.keys = [arcade.key.LEFT,
                      arcade.key.UP,
@@ -39,12 +41,56 @@ class Player(arcade.Sprite):
         self.right_pressed = False
         self.up_pressed = False
         self.down_pressed = False
-        
+
+    def key_handler(self, key, pressed):
+        """Called if a key belongs to the Player instance
+        if the key was pressed, the pressed var is True
+        but if reeased, the pressed var is False
+
+        Args:
+            key (int): an int corresponding to a keyboard key
+            pressed (bool): True for pressed, False for released
+        """
+        if key == self.keys[0]:
+            self.left_pressed = pressed
+        if key == self.keys[1]:
+            self.up_pressed = pressed
+        if key == self.keys[2]:
+            self.right_pressed = pressed
+        if key == self.keys[3]:
+            self.down_pressed = pressed
+
+    def set_keys(self, key_list):
+        """Sets the keys for a player instance
+
+        Args:
+            key_list (list of four ints): Each int maps to a keyboard
+        >>> player2 = Player()
+        >>> player2.set_keys([arcade.key.A,
+                              arcade.key.W,
+                              arcade.key.D,
+                              arcade.key.S])
+        """
+        self.keys = key_list
 
     def update(self):
-        """ Move the player """
+        """ Move the player 
+        Monitors the status of key_pressed (left, right, up, down)
+        and adjusts position accordingly
+        """
         # Move player.
-        # Remove these lines if physics engine is moving player.
+        self.change_x = 0
+        self.change_y = 0
+
+        if self.up_pressed and not self.down_pressed:
+            self.change_y = MOVEMENT_SPEED
+        elif self.down_pressed and not self.up_pressed:
+            self.change_y = -MOVEMENT_SPEED
+        if self.left_pressed and not self.right_pressed:
+            self.change_x = -MOVEMENT_SPEED
+        elif self.right_pressed and not self.left_pressed:
+            self.change_x = MOVEMENT_SPEED
+        
         self.center_x += self.change_x
         self.center_y += self.change_y
 
@@ -79,13 +125,6 @@ class MyGame(arcade.Window):
         # Set up the player info
         self.player_sprite = None
 
-        # Track the current state of what key is pressed
-        # THESE WILL BECOME OBSOLETE/UNNECESSARY
-        self.left_pressed = False
-        self.right_pressed = False
-        self.up_pressed = False
-        self.down_pressed = False
-
         # Set the background color
         arcade.set_background_color(arcade.color.AMAZON)
 
@@ -95,7 +134,7 @@ class MyGame(arcade.Window):
         # Sprite lists
         self.player_list = arcade.SpriteList()
 
-        # Set up the player
+        # Set up the players
         self.player_sprite = Player()
         self.player_list.append(self.player_sprite)
 
@@ -112,51 +151,28 @@ class MyGame(arcade.Window):
 
     def on_update(self, delta_time):
         """ Movement and game logic """
-
-        # Calculate speed based on the keys pressed
-        self.player_sprite.change_x = 0
-        self.player_sprite.change_y = 0
-
-        if self.up_pressed and not self.down_pressed:
-            self.player_sprite.change_y = MOVEMENT_SPEED
-        elif self.down_pressed and not self.up_pressed:
-            self.player_sprite.change_y = -MOVEMENT_SPEED
-        if self.left_pressed and not self.right_pressed:
-            self.player_sprite.change_x = -MOVEMENT_SPEED
-        elif self.right_pressed and not self.left_pressed:
-            self.player_sprite.change_x = MOVEMENT_SPEED
-
         # Call update to move the sprite
-        # If using a physics engine, call update player to rely on physics engine
-        # for movement, and call physics engine here.
         self.player_list.update()
 
     def on_key_press(self, key, modifiers):
-        """Called whenever a key is pressed. """
+        """Called whenever a key is pressed. 
+        For each player, the method will now check if the key
+        belongs to a player, and if it does, call the key_handler
+        to let the instance know a key belonging to it was pressed
+        """
         for player in self.player_list:
             if key in player.keys:
-                player.key_handler(key)
-               
-        if key == arcade.key.UP:
-            self.up_pressed = True
-        elif key == arcade.key.DOWN:
-            self.down_pressed = True
-        elif key == arcade.key.LEFT:
-            self.left_pressed = True
-        elif key == arcade.key.RIGHT:
-            self.right_pressed = True
+                player.key_handler(key, True)
 
     def on_key_release(self, key, modifiers):
-        """Called when the user releases a key. """
-
-        if key == arcade.key.UP:
-            self.up_pressed = False
-        elif key == arcade.key.DOWN:
-            self.down_pressed = False
-        elif key == arcade.key.LEFT:
-            self.left_pressed = False
-        elif key == arcade.key.RIGHT:
-            self.right_pressed = False
+        """Called when the user releases a key. 
+        For each player, the method will now check if the key
+        belongs to a player, and if it does, call the key_handler
+        to let the instance know a key belonging to it was released
+        """
+        for player in self.player_list:
+            if key in player.keys:
+                player.key_handler(key, False)
 
 
 def main():
