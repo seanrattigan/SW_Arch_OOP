@@ -3,8 +3,17 @@ from settings import *
 
 
 class Player(arcade.Sprite):
-    counter = 0
+    """A Player with movement up down left right
 
+    Relies on several settings:
+    - SPRITE_SCALING
+    - MOVEMENT_SPEED = 5
+    - SPRITE_SCALING
+    - SCREEN_WIDTH
+    - SCREEN_HEIGHT
+    - player_img (a default image for the player)
+    """
+    counter = 0
     def __init__(self, img=player_img):
         super().__init__(img, SPRITE_SCALING)
         self.center_x = 50
