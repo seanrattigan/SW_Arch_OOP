@@ -46,9 +46,10 @@ class MyGame(arcade.Window):
         # Sprite lists
         self.player_list = arcade.SpriteList()
 
-        # Set up the players
-        self.player_sprite = Player()
-        self.player_list.append(self.player_sprite)
+        # Set up the players -  say user entered "3 pl"
+        num_players_wanted = 3
+        for p in range(num_players_wanted):
+            self.player_list.append(Player())
 
     def on_draw(self):
         """
