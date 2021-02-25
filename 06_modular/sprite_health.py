@@ -195,7 +195,7 @@ class MyGame(arcade.Window):
 
             # If it did, get rid of the bullet
             if len(hit_list) > 0:
-                bullet.remove_from_sprite_lists()
+                bullet.kill()
 
             # For every coin we hit, process
             for coin in hit_list:
@@ -209,7 +209,7 @@ class MyGame(arcade.Window):
                 # Check health
                 if coin.cur_health <= 0:
                     # Dead
-                    coin.remove_from_sprite_lists()
+                    coin.remove_from_sprite_lists()  # kill()
                     self.score += 1
                     arcade.play_sound(self.death_sound)
                 else:
