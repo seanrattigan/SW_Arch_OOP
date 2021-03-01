@@ -61,10 +61,8 @@ class Player(arcade.Sprite):
         self.down_pressed = False
         Player.player_num += 1
 
-
     def __repr__(self):
         return f"Player {self.id} @pos({self.center_x},{self.center_y} using {self.keys}"
-
 
     def key_handler(self, key, pressed):
         """Called if a key belongs to the Player instance

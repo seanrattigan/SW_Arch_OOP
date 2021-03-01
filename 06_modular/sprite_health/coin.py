@@ -7,7 +7,7 @@ from settings import *
 class HealthCoin(arcade.Sprite):
     """ Sprite with hit points """
 
-    def __init__(self, image, scale, max_health=5):
+    def __init__(self, image, scale, max_health=6):
         super().__init__(image, scale)
         self.worth = 4
         # Add extra attributes for health
@@ -18,8 +18,8 @@ class HealthCoin(arcade.Sprite):
         self.center_x = x
         self.center_y = y
 
-    def hit(self):
-        self.cur_health -= 1
+    def hit(self, pow=1):
+        self.cur_health -= pow
         if self.cur_health <= 1:
             arcade.play_sound(COIN_DEAD_SND)
             points = self.worth

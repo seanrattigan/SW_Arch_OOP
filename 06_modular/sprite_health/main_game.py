@@ -1,14 +1,10 @@
 """
 Sprite Hit Points and Health Bars
-
-Artwork from http://kenney.nl
-
-If Python and Arcade are installed, this example can be run from the command line with:
-python -m arcade.examples.sprite_health
 """
 import random
 import arcade
 from coin import HealthCoin
+from bullet import Bullet
 from settings import *
 
 
@@ -19,30 +15,22 @@ class MyGame(arcade.Window):
         """ Initializer """
         # Call the parent class initializer
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
-
         # Variables that will hold sprite lists
         self.player_list = None
         self.coin_list = None
         self.bullet_list = None
-
         # Set up the player info
         self.player_sprite = None
         self.score = 0
-
         # Don't show the mouse cursor
         self.set_mouse_visible(False)
-
-        # Load sounds. Sounds from kenney.nl
-        self.gun_sound = arcade.load_sound(":resources:sounds/hurt5.wav")
-        self.hit_sound = arcade.load_sound(":resources:sounds/hit4.wav")
-        self.death_sound = arcade.load_sound(":resources:sounds/hit5.wav")
-
+        # Load sounds are in settings- sorted with associated obj
         arcade.set_background_color(arcade.color.AMAZON)
 
+        self.gun_sound = arcade.load_sound(":resources:sounds/hurt5.wav")
+
     def setup(self):
-
         """ Set up the game and initialize the variables. """
-
         # Sprite lists
         self.player_list = arcade.SpriteList()
         self.coin_list = arcade.SpriteList()
@@ -64,11 +52,8 @@ class MyGame(arcade.Window):
             # Position the coin
             coin.set_pos(random.randrange(SCREEN_WIDTH),
                          random.randrange(150, SCREEN_HEIGHT))
-
             # Add the coin to the lists
             self.coin_list.append(coin)
-
-        # Set the background color
         arcade.set_background_color(arcade.color.AMAZON)
 
     def on_draw(self):
@@ -101,30 +86,14 @@ class MyGame(arcade.Window):
         """
         Called whenever the mouse button is clicked.
         """
-        # Gunshot sound
-        arcade.play_sound(self.gun_sound)
-        # Create a bullet
-        bullet = arcade.Sprite(":resources:images/space_shooter/laserBlue01.png", SPRITE_SCALING_LASER)
-
-        # The image points to the right, and we want it to point up. So
-        # rotate it.
-        bullet.angle = 90
-
-        # Give the bullet a speed
-        bullet.change_y = BULLET_SPEED
-
-        # Position the bullet
-        bullet.center_x = self.player_sprite.center_x
-        bullet.bottom = self.player_sprite.top
-
-        # Add the bullet to the appropriate lists
+        bullet = Bullet(self.player_sprite.center_x, self.player_sprite.top)
         self.bullet_list.append(bullet)
 
     def on_update(self, delta_time):
         """ Movement and game logic """
 
         # Call update on bullet sprites
-        self.bullet_list.update()
+        self.bullet_list.update()  # using default update for Sprite
 
         # Loop through each bullet
         for bullet in self.bullet_list:
@@ -134,20 +103,14 @@ class MyGame(arcade.Window):
 
             # If it did, get rid of the bullet
             if len(hit_list) > 0:
-                bullet.remove_from_sprite_lists()
+                bullet.kill()
 
             # For every coin we hit, process
             for coin in hit_list:
                 # Make sure this is the right type of class
                 if not isinstance(coin, HealthCoin):
-                    raise TypeError("List contents must be all ints")
-
-                self.score += coin.hit()
-
-            # If the bullet flies off-screen, remove it.
-            if bullet.bottom > SCREEN_HEIGHT:
-                bullet.remove_from_sprite_lists()
-
+                    raise TypeError("List contents must be all coins")
+                self.score += coin.hit(2)
 
 def main():
     """ Main Program """

@@ -18,7 +18,7 @@ player_img = ":resources:images/animated_characters/female_person/femalePerson_i
 GUN_SOUND = arcade.load_sound(":resources:sounds/hurt5.wav")
 BULLET_IMG = ":resources:images/space_shooter/laserBlue01.png"
 SPRITE_SCALING_LASER = 0.8
-BULLET_SPEED = 5
+BULLET_SPEED = 10
 
 # Settings for Coin
 COIN_IMG = ":resources:images/items/coinGold.png"
