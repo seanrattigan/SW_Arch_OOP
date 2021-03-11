@@ -60,10 +60,9 @@ class MyGame(arcade.Window):
         """
         Render the screen.
         """
-
         # This command has to happen before we start drawing
         arcade.start_render()
-
+        
         # Draw all the sprites.
         self.coin_list.draw()
         self.bullet_list.draw()
@@ -73,8 +72,13 @@ class MyGame(arcade.Window):
             coin.draw_health_number()
             coin.draw_health_bar()
 
-        # Render the text
-        arcade.draw_text(f"Score: {self.score}", 10, 20, arcade.color.WHITE, 14)
+       # draw a black box at top of screen
+
+        # render the text on top
+        arcade.draw_text(f"Score: {self.score}", 10, 20,
+                         arcade.color.WHITE, 14,
+                         font_name='Arial')
+
 
     def on_mouse_motion(self, x, y, dx, dy):
         """
@@ -110,7 +114,8 @@ class MyGame(arcade.Window):
                 # Make sure this is the right type of class
                 if not isinstance(coin, HealthCoin):
                     raise TypeError("List contents must be all coins")
-                self.score += coin.hit(2)
+                self.score += coin.hit(2)  # bullet.owner.score += coin.hit(2)
+
 
 def main():
     """ Main Program """

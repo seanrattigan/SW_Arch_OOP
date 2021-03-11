@@ -8,7 +8,25 @@
 # - give the bullet an ID linked to the player
 
 import arcade
+from bullet import Bullet
 
-
+# one way
 class Player(arcade.Sprite):
-    pass
+    
+    def __init__(self):
+        # cal super
+        self.bullet_list = arcade.SpriteList
+    
+    def shoot(self):
+        self.bullet_list.append(Bullet(self.center_x, self.top))
+
+
+# another way
+class Player(arcade.Sprite):
+    
+    def __init__(self):
+        # cal super
+        pass
+
+    def shoot(self):
+        return(Bullet(self.center_x, self.top, self))

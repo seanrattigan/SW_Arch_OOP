@@ -1,4 +1,4 @@
-
+import arcade
 
 # Settings for screen
 SCREEN_WIDTH = 800

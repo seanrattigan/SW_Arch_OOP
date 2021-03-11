@@ -143,6 +143,6 @@ if __name__ == "__main__":
     player_1 = Player()
     player_2 = Player()
     player_3 = Player()
-    print(player_1.__repr__())  # sr could be
+    print(player_1.__repr__())  # str could be different
     print(player_2)  # Player 2 [3] 3876    
     print(player_3)
