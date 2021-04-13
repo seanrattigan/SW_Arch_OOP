@@ -61,7 +61,7 @@ class SavingsAccount(BankAccount):
     def __init__(self, customer, amount):
         if amount < 100:
             raise ValueError("Amount must be 100 or more")
-        super.__init__(customer, amount)
+        super().__init__(customer, amount)
         
     def withdraw(self, amount):
         if self.balance - amount < 80:
@@ -70,17 +70,18 @@ class SavingsAccount(BankAccount):
             self.balance -= amount
             
     def deposit(self, amount):
-        if self.amount < 10:
+        if amount < 10:
             print("Min deposit is 10")
         else:
             self.balance += amount
 
 accounts = []
 for a in range(10):
-    accounts.append(SavingsAccount("Ted", random.randrange(199)))
+    accounts.append(SavingsAccount("Ted", random.randrange(100,499)))
     
 for acc in accounts:
     amnt = random.randrange(20)
+    print(acc)
     acc.deposit(amnt)
     print(acc)
     acc.withdraw(amnt)
