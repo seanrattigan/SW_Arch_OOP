@@ -23,6 +23,7 @@ class Snowflake:
         self.size = random.randrange(4)
         self.speed = random.randrange(20, 40)
         self.angle = random.uniform(math.pi, math.pi * 2)
+        self.color = (255, 255, 255)
 
     def set_new_pos(self):
         # Reset flake to random position above screen
@@ -33,7 +34,7 @@ class Snowflake:
         arcade.draw_circle_filled(self.x,
                                   self.y,
                                   self.size,
-                                  arcade.color.WHITE)
+                                  self.color)
 
     def update(self, delta_time):
         self.y -= self.speed * delta_time
